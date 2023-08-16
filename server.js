@@ -4,17 +4,26 @@ const port = process.env.PORT || 5000
 const connectDB = require('./config/db')
 const cityroutes = require('./routes/city.routes')
 const attractionroutes = require('./routes/attractions.routes')
+const cors = require('cors')
+const helmet = require('helmet');
 
 
 const app = express();
 
+//Les middlewares
 app.use(express.json());
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
+app.use(helmet.hidePoweredBy());
+app.use(cors({
+    origin: '*',
+    optionsSuccessStatus: 200 ,
+    methods: "GET,POST, PUT"
+}))
 
 
 //les routes de l'api
-app.use('/api/city', cityroutes)
-app.use('/api/attration', attractionroutes)
+app.use('/api/v1/city', cityroutes)
+app.use('/api/v1/attraction', attractionroutes)
 
 
 //Connection a la bas e de données

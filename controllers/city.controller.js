@@ -1,10 +1,12 @@
 const cityModel = require("../models/city.model")
 
 module.exports.getCity = async(req, res) => {
-    console.log('all cities')
+    const city = await cityModel.find({});
+    res.status(200).json({"success": true, city});
 }
 
 module.exports.addCity = async(req, res) => {
+    
 
 }
 
