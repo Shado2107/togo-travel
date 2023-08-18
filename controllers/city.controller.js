@@ -7,7 +7,7 @@ module.exports.getCity = async(req, res) => {
 
 module.exports.addCity = async(req, res) => {
     try {
-        const {name, country, description } = req.body
+        const {name, country, description, photos } = req.body
 
          // Vérification si le nom de la ville existe déjà
         const existingCity = await cityModel.findOne({ name });
@@ -22,7 +22,8 @@ module.exports.addCity = async(req, res) => {
             const newCity = await new cityModel({
                 name,
                 country,
-                description
+                description,
+                photos
             });
 
             const savedCity = await newCity.save();
