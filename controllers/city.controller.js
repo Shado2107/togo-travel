@@ -4,7 +4,7 @@ module.exports.getCity = async(req, res) => {
     const city = await cityModel.find({});
     res.status(200).json({success: true, city: city});
 }
-
+ 
 module.exports.addCity = async(req, res) => {
     try {
         const {name, country, description, photos } = req.body
@@ -13,15 +13,15 @@ module.exports.addCity = async(req, res) => {
         const existingCity = await cityModel.findOne({ name });
 
         if (existingCity) {
-            return res.status(400).json({success:false, message: 'Le nom de la ville existe déjà.' });
+             return res.status(400).json({success:false, message: 'Le nom de la ville existe déjà.' });
         }
-
+ 
         if(!name || !country || !description) {
             return res.status(400).json({sucess: false, message: "Veuillez remplir toutes les informations"});
         }
             const newCity = await new cityModel({
                 name,
-                country,
+                 country,
                 description,
                 photos
             });
